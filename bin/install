@@ -13,7 +13,6 @@ install_ninja() {
 
    # path to the tar file
   local source_path=$(get_download_file_path $version $tmp_download_dir)
-  echo "source_path=$source_path"
   download_source_file $version $source_path
 
   # running this in subshell
@@ -28,23 +27,14 @@ install_ninja() {
 
      cd $tmp_download_dir/ninja-${version}
      ./configure.py --bootstrap
-     echo "install_path=$install_path"
-     ls -al
-     if [[ $? -eq 0 ]]; then
-       cp ninja $install_path
-     fi
+     cp ninja $install_path
   )
 }
-
-# install_deps() {
-# }
 
 download_source_file() {
   local version=$1
   local download_path=$2
   local download_url=$(get_download_url $version)
-
-  echo "download_url=${download_url}"
 
   curl -Lo $download_path -C - $download_url
 }
